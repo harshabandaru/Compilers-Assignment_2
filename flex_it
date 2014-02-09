@@ -1,0 +1,70 @@
+DIGITS [0-9]+
+ID [a-zA-Z][a-zA-Z0-9]*
+FRAC ("."{DIGITS})
+OPTIONALEXP (E("\+"|"-")?{DIGITS})?
+INT {DIGITS}
+FLOAT {DIGITS}{FRAC}{OPTIONALEXP}
+%%
+{INT}	{
+                     printf( "An integer: %s (%d)\n", yytext,
+                             atoi( yytext ) );
+         			 }
+
+{FLOAT}  {
+                     printf( "A float: %s (%g)\n", yytext,
+                             atof( yytext ) );
+                     }
+
+if|else|auto|const|break|case|char|continue|default|do|while|enum|extern|float|for|goto|int|long|register|return|short|signed|sizeof|static|struct|switch|typedef|union|unsigned|void|volatile	{
+                     printf( "A keyword: %s\n", yytext );
+                     }
+
+{ID}	{
+                     printf( "An Identifier: %s\n", yytext );
+                     }
+
+"=="|">="|"<="|"+="|"++"|"<<"|">>"|"-="|"*="|"/="|"%="|"--"|"+"|"-"|"*"|"/"|">"|"<"|"="|"%"|"&&"|"||"|"!"   printf( "An operator: %s\n", yytext );
+;		{		
+					 printf("A Semicolon\n");
+					 }
+,		{
+					 printf("A comma\n");
+					 }	
+
+"\{"		printf("Opening Curly bracket\n");
+
+"\}"		printf("Closing Curly bracket\n");
+
+"\["		printf("Opening square bracket\n");
+
+"\]"		printf("Closing square bracket\n");
+
+"\("		printf("Opening normal bracket\n");
+
+"\)"		printf("Closing normal bracket\n");
+
+"\'"		printf("single quotation");
+
+"\""		printf("double quotation");
+
+[ \n\t]				/* eat up whitespace */	
+
+
+
+.					printf( "Unrecognized character: %s\n", yytext );
+
+
+
+%%
+     
+         int main( int argc, char **argv )
+             {
+            
+             if ( argc > 1 )
+                     yyin = fopen( argv[1], "r" );
+             else
+                     yyin = stdin;
+     
+             yylex();
+             }
+
