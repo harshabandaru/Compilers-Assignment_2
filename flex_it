@@ -6,7 +6,11 @@ INT {DIGITS}
 FLOAT {DIGITS}{FRAC}{OPTIONALEXP}
 STRING ("\"")(.*)("\"")
 CHAR ("\'")(.)("\'")
+COMMENTS ("//")(.*)
 %%
+{COMMENTS}  {
+                printf("A comment: %s\n", yytext);
+                    }
 {INT}	{
                      printf( "An integer: %s (%d)\n", yytext,
                              atoi( yytext ) );

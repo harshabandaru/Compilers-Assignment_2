@@ -1,0 +1,9 @@
+int main()
+{
+	int jj= 1;
+	float d = 2 ;
+	jj ++;
+	jj *= 222;
+	if ( jj == 1 )
+		d -- ;
+}

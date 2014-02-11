@@ -1,0 +1,9 @@
+#define MAX 500
+int main()
+{
+	int i = 1;
+	char x = 'c';
+	char d[10] = "jha11_ds";
+	float a = 3.2E4;
+	int x = 'a'^;
+}
